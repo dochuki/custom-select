@@ -1,0 +1,20 @@
+<form [formGroup]="form" (submit)="logForm()">
+  <app-custom-select [selected]="bvSubject.value[1]" [data]="bvSubject | async" [formControlName]="'select'">
+  </app-custom-select>
+  <app-custom-select [selected]="bvSubject.value[1]" [data]="bvSubject | async" [formControlName]="'select2'">
+  </app-custom-select>
+  <button class="send-button">Absenden</button>
+  <pre>
+    {{form.value | json}}
+  </pre>
+</form>
+
+<form #ngForm="ngForm" (submit)="testNgForm(ngForm.value)">
+  <app-custom-select [disabled]="true"  name="select" [data]="list" ngModel></app-custom-select>
+  <button class="send-button" type="submit">Submit</button>
+  <pre>
+    {{ngForm.value | json}}
+  </pre>
+</form>
+
+

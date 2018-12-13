@@ -1,0 +1,9 @@
+<div class="list-wrapper">
+  <ul class="select-menu" [ngClass]="{active: isActive}" #selectBar>
+    <li *ngFor="let item of filtered; let i = index"
+        (click)="emitItem(item, i)"
+        [ngClass]="{currentPos: i === currentPos}">
+      <span *ngIf="i === currentPos">&#10004;</span> {{item.key}}
+    </li>
+  </ul>
+</div>

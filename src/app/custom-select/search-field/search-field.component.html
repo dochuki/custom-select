@@ -1,0 +1,13 @@
+<input type="search"
+       class="search-field"
+       #searchField
+       [value]="searchValue"
+       (search)="searchVal($event)"
+       (click)="showBar()"
+       (focus)="showBar()"
+       (blur)="hideBar($event)"
+       (keyup)="searchVal($event)"
+       [disabled]="disabled"
+       [placeholder]="placeholder"
+       (change)="searchValChanged($event)"
+>
