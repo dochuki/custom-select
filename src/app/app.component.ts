@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {BehaviorSubject} from 'rxjs';
 
@@ -12,7 +12,7 @@ export class AppComponent {
   private _form: FormGroup = new FormGroup({
     select: new FormControl(),
     select2: new FormControl(),
-    select3: new FormControl(),
+    select3: new FormControl({value: '', disabled: true}),
     select4: new FormControl()
   });
   list: { key: string, value: any }[] = [
