@@ -20,6 +20,7 @@ import {HelperClass} from '../classes/helper-class';
 })
 export class MultiSelectComponent extends CustomSelectParentComponent<any[]> implements OnInit, ControlValueAccessor, AfterViewInit {
 
+  private _placeholder = '';
 
   private _chips = [];
   private _tmpSearchVal = '';
@@ -109,5 +110,14 @@ export class MultiSelectComponent extends CustomSelectParentComponent<any[]> imp
 
   set tmpSearchVal(value: string) {
     this._tmpSearchVal = value;
+  }
+
+  @Input()
+  get placeholder(): string {
+    return this._placeholder;
+  }
+
+  set placeholder(value: string) {
+    this._placeholder = value;
   }
 }

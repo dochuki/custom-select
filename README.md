@@ -25,4 +25,24 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-# custom-select
+
+
+#Custom-Select Informations
+
+
+
+The select input became two components because the multi attribute would have increased the complexity for nothing.
+In addition, some functionalities and attributes could be inherited.
+I also think it doesn't make much difference whether I write the component name or set an attribute.
+
+The two components have the following attributes which can be used. These are marked with [].
+
+<app-custom-select 
+[selected]="ICustomSelect" 
+[disabled]="boolean">
+##
+<app-custom-multi-selct 
+[selected]="ICustomSelect[]"  
+[placeholder]="string" 
+[disabled]="boolean">
+

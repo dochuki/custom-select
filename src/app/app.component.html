@@ -1,11 +1,14 @@
 <form [formGroup]="form" (submit)="logForm()">
   <app-custom-select [selected]="bvSubject.value[3]" [data]="bvSubject | async" [formControlName]="'select'">
   </app-custom-select>
+
   <app-custom-select [disabled]="true" [selected]="bvSubject.value[1]" [data]="bvSubject | async"
                      [formControlName]="'select2'">
   </app-custom-select>
   <app-multi-select [placeholder]="'Getränke'" [data]="list" [selected]="[bvSubject.value[1]]" [formControlName]="'select3'"></app-multi-select>
 
+  <app-custom-select [data]="bvSubject | async" [formControlName]="'select4'">
+  </app-custom-select>
   <button class="send-button">Absenden</button>
   <pre>
     {{form.value | json}}

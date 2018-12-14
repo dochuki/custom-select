@@ -13,7 +13,6 @@ export abstract class CustomSelectParentComponent<T> implements OnInit, ControlV
   protected _value: any;
   protected _disabled = false;
   protected _selected: ICustomSelect;
-  private _placeholder = '';
 
   @HostListener('keyup', ['$event'])
   selectItem(e) {
@@ -77,7 +76,6 @@ export abstract class CustomSelectParentComponent<T> implements OnInit, ControlV
   };
 
   /*GETTER AND SETTER*/
-  @Input()
   get value() {
     return this._value;
   }
@@ -148,15 +146,6 @@ export abstract class CustomSelectParentComponent<T> implements OnInit, ControlV
   protected setItem(value, index) {
     this.value = value;
     this.position = index;
-  }
-
-  @Input()
-  get placeholder(): string {
-    return this._placeholder;
-  }
-
-  set placeholder(value: string) {
-    this._placeholder = value;
   }
 
 
