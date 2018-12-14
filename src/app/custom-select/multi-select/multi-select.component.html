@@ -7,7 +7,7 @@
     [searchValue]="tmpSearchVal"
     [disabled]="disabled">
   </app-search-field>
-  <ul class="custom-chips">
+  <ul class="custom-chips" [ngClass]="{disabled: disabled}">
     <li *ngFor="let chip of chips">
       {{chip.key}}
       {{chip.label}}
