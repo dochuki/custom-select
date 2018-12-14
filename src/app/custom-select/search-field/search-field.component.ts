@@ -97,7 +97,6 @@ export class SearchFieldComponent implements OnInit {
   }
 
   set searchValue(value: string) {
-    console.log(value);
     this._searchValue = value;
   }
 

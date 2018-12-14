@@ -37,7 +37,6 @@ export class MultiSelectComponent extends CustomSelectParentComponent<any[]> imp
       for (let i = 0; i < listOfSelected.length; i++) {
         const selected = this.selected[i];
         this.setItem(selected, i);
-        console.log(selected);
       }
     } else {
       this.value = this.placeholder;
