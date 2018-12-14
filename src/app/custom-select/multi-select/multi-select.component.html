@@ -3,12 +3,18 @@
     [data]="data"
     (listEmitter)="filtered=$event"
     (statusEmitter)="isActive=$event"
-    (searchValueEmitter)="getInformed($event)"
-    [searchValue]="value"
-    [disabled]="disabled"
-  >
+    [searchValue]="''"
+    [disabled]="isDisabled">
   </app-search-field>
+  <ul class="custom-chips">
+    <li *ngFor="let chip of chips">
+      {{chip.key}}
+      {{chip.label}}
+      <span (click)="deleteChip(chip)">&#x2716;</span>
+    </li>
+  </ul>
   <app-select-list
+    [selectedElements]="chips"
     (selectEmitter)="setItem($event.item, $event.index)"
     [currentPos]="position"
     [isActive]="isActive"

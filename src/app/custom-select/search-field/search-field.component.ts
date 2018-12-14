@@ -1,5 +1,7 @@
 import {ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {EKeyCode} from '../enums/e-key-code.enum';
+import {isArray} from 'rxjs/internal-compatibility';
+import {ICustomSelect} from '../interfaces/i-custom-select';
 
 @Component({
   selector: 'app-search-field',
@@ -10,9 +12,9 @@ import {EKeyCode} from '../enums/e-key-code.enum';
 export class SearchFieldComponent implements OnInit {
 
 
-  private _data: { key: string, value: any }[] = [];
+  private _data: ICustomSelect[] = [];
   private _isActive = false;
-  @Output() listEmitter: EventEmitter<{ key: string, value: any }[]> = new EventEmitter();
+  @Output() listEmitter: EventEmitter<ICustomSelect[]> = new EventEmitter();
   @Output() statusEmitter: EventEmitter<boolean> = new EventEmitter();
   @Output() searchValueEmitter: EventEmitter<string> = new EventEmitter();
   private _searchValue = '';
@@ -34,6 +36,7 @@ export class SearchFieldComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
 
@@ -42,8 +45,8 @@ export class SearchFieldComponent implements OnInit {
     const searchInput = $event.target.value;
     this._tmpSearchVal = searchInput;
 
-    const list: { key: string, value: any }[] = [];
-    this.data.forEach((value: { key: string, value: any }) => {
+    const list: ICustomSelect[] = [];
+    this.data.forEach((value: ICustomSelect) => {
       if (typeof value.key === 'string' && value.key.toLowerCase().indexOf(searchInput.toLowerCase()) > -1) {
         list.push(value);
       }
@@ -71,11 +74,11 @@ export class SearchFieldComponent implements OnInit {
 
 
   @Input()
-  get data(): { key: string, value: any }[] {
+  get data(): ICustomSelect[] {
     return this._data;
   }
 
-  set data(value: { key: string, value: any }[]) {
+  set data(value: ICustomSelect[]) {
     this._data = value;
   }
 
@@ -91,6 +94,13 @@ export class SearchFieldComponent implements OnInit {
   @Input()
   get searchValue(): string {
     return this._searchValue;
+  }
+
+  private _flatten(tmpArr: any[]) {
+    const newArr = tmpArr.map((value) => {
+      return value['key'];
+    });
+    return newArr.join(',');
   }
 
   set searchValue(value: string) {

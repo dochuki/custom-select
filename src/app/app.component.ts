@@ -11,7 +11,8 @@ export class AppComponent {
 
   private _form: FormGroup = new FormGroup({
     select: new FormControl(),
-    select2: new FormControl()
+    select2: new FormControl(),
+    select3: new FormControl()
   });
   list: { key: string, value: any }[] = [
     {key: 'Wasser', value: 'Wasser'},

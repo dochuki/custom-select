@@ -9,11 +9,13 @@ import {EKeyCode} from '../enums/e-key-code.enum';
 })
 export class SelectListComponent implements OnInit {
 
+
   private _filtered: { key: string, value: any }[] = [];
   private _isActive = true;
   private _currentPos = 0;
   @ViewChild('selectBar') selectBar: ElementRef<HTMLUListElement>;
   @Output() selectEmitter: EventEmitter<{ item: string, index: number }> = new EventEmitter();
+  private _selectedElements: any[] = [];
 
   constructor() {
   }
@@ -60,6 +62,25 @@ export class SelectListComponent implements OnInit {
 
   emitItem(item, index) {
     this.selectEmitter.emit({item: item, index: index});
+  }
+
+  @Input()
+  get selectedElements(): any[] {
+    return this._selectedElements;
+  }
+
+  set selectedElements(value: any[]) {
+    this._selectedElements = value;
+  }
+
+  checkIsInChips(item: any) {
+    for (let i = 0; i < this.selectedElements.length; i++) {
+      const selected = this.selectedElements[i];
+      if (selected.key === item.key) {
+        return true;
+      }
+    }
+    return false;
   }
 
 }

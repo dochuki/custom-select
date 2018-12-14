@@ -23,8 +23,13 @@
     border: 1px solid transparent
     &.currentPos
       border: 1px solid #dddddd
+    &.selected
+      background: #dddddd
+      color: #333333
+      pointer-events: none
   &.active
     pointer-events: auto
     transform: scaleY(1)
     max-height: 150px
     display: block
+

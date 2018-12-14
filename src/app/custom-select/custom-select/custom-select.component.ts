@@ -9,8 +9,9 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import {EKeyCode} from '../enums/e-key-code.enum';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {EKeyCode} from '../enums/e-key-code.enum';
+import {CustomSelectParentComponent} from '../classes/custom-select-parent';
 
 @Component({
   selector: 'app-custom-select',
@@ -25,56 +26,22 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CustomSelectComponent implements OnInit, ControlValueAccessor, AfterViewInit {
+export class CustomSelectComponent extends CustomSelectParentComponent<string> implements OnInit, ControlValueAccessor, AfterViewInit {
 
 
   @ViewChild('searchField') searchField: ElementRef<HTMLInputElement>;
-  private _data: { key: string, value: any }[] = [];
-  private _position = 0;
-  private _value = '';
-  private _filtered: { key: string, value: any }[] = [];
-  private _isActive = false;
-  private _selected = '';
-  private _disabled = false;
-
-  @HostListener('keyup', ['$event'])
-  selectItem(e) {
-    e.preventDefault();
-
-    this.isActive = true;
-    const keyCode = e.which;
-    switch (keyCode) {
-      case EKeyCode.DOWN:
-        this.position++;
-        break;
-      case EKeyCode.UP:
-        this.position--;
-        break;
-      case EKeyCode.ENTER:
-        if (!!this.filtered[this.position]) {
-          this.setItem(this.filtered[this.position], this.position);
-        }
-        break;
-    }
-
-    if (this.position < 0) {
-      this.position = this.filtered.length - 1;
-    } else if (this.position >= this.filtered.length) {
-      this.position = 0;
-    }
-
-  }
-
 
   constructor(private change: ChangeDetectorRef) {
+    super();
   }
 
 
   ngOnInit() {
-    this._newAssign();
+    super.ngOnInit();
+
     setTimeout(() => {
       this.change.markForCheck();
-      if (this.selected !== '') {
+      if (!!this.selected && this.selected.key !==  '') {
         const ifFoundItem = this._findItem(this.selected);
         this.value = ifFoundItem.label;
         this.position = ifFoundItem.index;
@@ -98,39 +65,14 @@ export class CustomSelectComponent implements OnInit, ControlValueAccessor, Afte
     return item;
   }
 
-  ngAfterViewInit() {
-  }
 
-  onChange: any = () => {
 
-  };
-  onTouched: any = () => {
-  };
-
-  private _newAssign() {
-    this.filtered = Object.assign([], this.data);
-  }
-
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-  }
-
-  writeValue(obj: any): void {
-    this.value = obj;
-  }
 
   setItem(item: { key: string, value: any }, index) {
     setTimeout(() => {
       this.change.markForCheck();
       this.position = index;
+
       this.value = item.value;
       this.isActive = false;
     });
@@ -140,72 +82,6 @@ export class CustomSelectComponent implements OnInit, ControlValueAccessor, Afte
     if (e === '') {
       this.value = this.value;
     }
-  }
-
-
-  /*GETTER AND SETTER*/
-  @Input()
-  get value() {
-    return this._value;
-  }
-
-  set value(val) {
-    this._value = val;
-    this.onChange(val);
-    this.onTouched();
-
-  }
-
-  @Input()
-  get data(): { key: string, value: any }[] {
-    return this._data;
-  }
-
-  set data(value: { key: string, value: any }[]) {
-    this._data = value;
-  }
-
-
-  get filtered(): { key: string, value: any }[] {
-    return this._filtered;
-  }
-
-  set filtered(value: { key: string, value: any }[]) {
-    this._filtered = value;
-  }
-
-
-  get position(): number {
-    return this._position;
-  }
-
-  set position(value: number) {
-    this._position = value;
-  }
-
-  get isActive(): boolean {
-    return this._isActive;
-  }
-
-  set isActive(value: boolean) {
-    this._isActive = value;
-  }
-
-  @Input()
-  get selected(): string {
-    return this._selected;
-  }
-
-  set selected(value: string) {
-    this._selected = value;
-  }
-
-  get disabled(): boolean {
-    return this._disabled;
-  }
-
-  set disabled(value: boolean) {
-    this._disabled = value;
   }
 
 
