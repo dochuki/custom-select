@@ -41,7 +41,7 @@ The two components have the following attributes which can be used. These are ma
 [selected]="ICustomSelect" 
 [disabled]="boolean">
 ##
-<app-custom-multi-selct 
+<app-custom-multi-select 
 [selected]="ICustomSelect[]"  
 [placeholder]="string" 
 [disabled]="boolean">
