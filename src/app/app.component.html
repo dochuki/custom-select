@@ -9,6 +9,10 @@
 
   <app-custom-select [data]="bvSubject | async" [formControlName]="'select4'">
   </app-custom-select>
+
+
+  <app-multi-select [placeholder]="'Getränke'" [data]="list" [selected]="[bvSubject.value[1],bvSubject.value[3]]" [formControlName]="'select5'"></app-multi-select>
+
   <button class="send-button">Absenden</button>
   <pre>
     {{form.value | json}}

@@ -13,7 +13,8 @@ export class AppComponent {
     select: new FormControl(),
     select2: new FormControl(),
     select3: new FormControl({value: '', disabled: true}),
-    select4: new FormControl()
+    select4: new FormControl(),
+    select5: new FormControl()
   });
   list: { key: string, value: any }[] = [
     {key: 'Wasser', value: 'Wasser'},
