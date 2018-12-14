@@ -1,10 +1,11 @@
 <div class="custom-select-holder">
   <app-search-field
     [data]="data"
+    [placeholder]="placeholder"
     (listEmitter)="filtered=$event"
     (statusEmitter)="isActive=$event"
-    [searchValue]="''"
-    [disabled]="isDisabled">
+    [searchValue]="tmpSearchVal"
+    [disabled]="disabled">
   </app-search-field>
   <ul class="custom-chips">
     <li *ngFor="let chip of chips">

@@ -66,7 +66,7 @@ export class SearchFieldComponent implements OnInit {
       this.isActive = false;
       this.statusEmitter.emit(this.isActive);
       if (this._tmpSearchVal !== this.searchValue) {
-        this.searchField.nativeElement.value = this.searchValue;
+          this.searchField.nativeElement.value = this.searchValue;
       }
 
     }, 150);
@@ -96,15 +96,8 @@ export class SearchFieldComponent implements OnInit {
     return this._searchValue;
   }
 
-  private _flatten(tmpArr: any[]) {
-    const newArr = tmpArr.map((value) => {
-      return value['key'];
-    });
-    return newArr.join(',');
-  }
-
   set searchValue(value: string) {
-    this.placeholder = value;
+    console.log(value);
     this._searchValue = value;
   }
 
@@ -112,6 +105,7 @@ export class SearchFieldComponent implements OnInit {
     this.searchValueEmitter.emit($event.target.value);
   }
 
+  @Input()
   get placeholder(): string {
     return this._placeholder;
   }

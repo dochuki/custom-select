@@ -4,13 +4,10 @@ import {
   Component,
   ElementRef,
   forwardRef,
-  HostListener,
-  Input,
   OnInit,
   ViewChild
 } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {EKeyCode} from '../enums/e-key-code.enum';
 import {CustomSelectParentComponent} from '../classes/custom-select-parent';
 
 @Component({
@@ -41,7 +38,7 @@ export class CustomSelectComponent extends CustomSelectParentComponent<string> i
 
     setTimeout(() => {
       this.change.markForCheck();
-      if (!!this.selected && this.selected.key !==  '') {
+      if (!!this.selected && this.selected.key !== '') {
         const ifFoundItem = this._findItem(this.selected);
         this.value = ifFoundItem.label;
         this.position = ifFoundItem.index;
@@ -64,8 +61,6 @@ export class CustomSelectComponent extends CustomSelectParentComponent<string> i
     });
     return item;
   }
-
-
 
 
   setItem(item: { key: string, value: any }, index) {

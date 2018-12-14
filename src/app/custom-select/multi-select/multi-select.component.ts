@@ -3,6 +3,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {CustomSelectParentComponent} from '../classes/custom-select-parent';
 import {isArray} from 'rxjs/internal-compatibility';
 import {ICustomSelect} from '../interfaces/i-custom-select';
+import {HelperClass} from '../classes/helper-class';
 
 @Component({
   selector: 'app-multi-select',
@@ -19,7 +20,9 @@ import {ICustomSelect} from '../interfaces/i-custom-select';
 })
 export class MultiSelectComponent extends CustomSelectParentComponent<any[]> implements OnInit, ControlValueAccessor, AfterViewInit {
 
+
   private _chips = [];
+  private _tmpSearchVal = '';
 
   constructor(protected change: ChangeDetectorRef) {
     super();
@@ -36,6 +39,8 @@ export class MultiSelectComponent extends CustomSelectParentComponent<any[]> imp
         console.log(selected);
       }
     } else {
+      this.value = this.placeholder;
+      this.tmpSearchVal = '';
       this.position = 0;
     }
   }
@@ -47,6 +52,9 @@ export class MultiSelectComponent extends CustomSelectParentComponent<any[]> imp
 
       this.addItemToChips(item);
       this.value = this._chips;
+      this.tmpSearchVal = HelperClass.valIsArray(this.value);
+
+
       this.isActive = false;
     });
   }
@@ -90,8 +98,16 @@ export class MultiSelectComponent extends CustomSelectParentComponent<any[]> imp
     this.chips.forEach((value, index, array) => {
       if (chip.key === value.key) {
         this.chips.splice(index, 1);
+        this.tmpSearchVal = HelperClass.valIsArray(this.value);
       }
     });
   }
 
+  get tmpSearchVal(): string {
+    return this._tmpSearchVal;
+  }
+
+  set tmpSearchVal(value: string) {
+    this._tmpSearchVal = value;
+  }
 }

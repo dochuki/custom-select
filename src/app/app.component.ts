@@ -24,7 +24,7 @@ export class AppComponent {
     {key: 'Wurstwasser', value: 'Wurstwasser'},
   ];
 
-  private bvSubject: BehaviorSubject<{ key: string, value: any }[]> =
+  public bvSubject: BehaviorSubject<{ key: string, value: any }[]> =
     new BehaviorSubject([
       {key: 'Wasser', value: 'Wasser'},
       {key: 'Fanta', value: 'Fanta'},
